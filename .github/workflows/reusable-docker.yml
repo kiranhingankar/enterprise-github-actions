@@ -42,11 +42,14 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.docker_username }}/${{ inputs.image_name }}:${{ inputs.tag }} .
+          docker build \
+          -t ${{ secrets.docker_username }}/${{ inputs.image_name }}:latest \
+          -t ${{ secrets.docker_username }}/${{ inputs.image_name }}:${{ inputs.tag }} .
 
       - name: Push Docker Image
         run: |
-         docker push ${{ secrets.docker_username }}/${{ inputs.image_name }}:${{ inputs.tag }}
+          docker push ${{ secrets.docker_username }}/${{ inputs.image_name }}:latest
+          docker push ${{ secrets.docker_username }}/${{ inputs.image_name }}:${{ inputs.tag }}
 
       - name: Set Image Output
         id: image
