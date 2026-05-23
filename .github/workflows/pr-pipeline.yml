@@ -32,11 +32,13 @@ jobs:
 
         with:
           fail-on-severity: critical 
-          
+
   pr_comment:
     runs-on: ubuntu-latest
 
-    needs: build-test
+    needs: 
+      - build-test
+      - dependency-review
 
     steps:
       - name: Print PR Summary
